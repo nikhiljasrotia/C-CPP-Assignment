@@ -472,6 +472,59 @@ int main()
 // };
 // Overload operator “!” to reverse the case of each alphabet in the string
 // (Uppercase to Lowercase and vice versa).
+#include <iostream>
+int Strlen(char*);
+using namespace std;
+class myString
+{
+  private :
+   char str[50];
+  public :
+    void SetData()
+	{
+	  cout<<"Enter String : ";
+	  cin.getline(str,50);	
+	}	
+	void operator!()
+	{
+		int i,n;
+		char ch;
+		n = Strlen(str);
+		i = 0;
+		while(i<n/2)
+		{
+		   ch = str[i];
+		   str[i] = str[n-1-i];
+		   str[n-1-i] = ch;
+			i++;
+		}
+		cout<<str<<endl;
+	}
+	void Display()
+	{
+		cout<<str<<endl;
+	}
+};
+int main()
+{
+	myString str;
+	str.SetData();
+	str.Display();
+	!str;
+	
+	return 0;
+}
+int Strlen(char*ptr)
+{
+	int i,len;
+	i = len = 0;
+	while(ptr[i])
+	{
+		len++;
+		i++;
+	}
+	return len;
+}
 // 10.Class Matrix
 // {
 // int a[3][3];
@@ -480,3 +533,58 @@ int main()
 // };
 // Let m1 and m2 are two matrices. Find out m3=m1+m2 (use operator
 // overloading).
+#include <iostream>
+using namespace std;
+class Matrix
+{
+ private :
+  int a[3][3];
+ public :
+  void SetMatrix()
+  {
+   cout<<"Enter Matrix Element (3 X 3) \n";
+   for(int i = 0; i<3;i++)
+   {
+   	for(int j = 0; j < 3; j++)
+   	{
+      cin>>a[i][j];		
+    }
+   }
+  }
+  Matrix operator+(Matrix C)
+  {
+  	Matrix temp;
+  	for(int i = 0; i<3;i++)
+  	{
+  	  for(int j = 0; j<3;j++)
+		{
+		temp.a[i][j] = a[i][j] + C.a[i][j];	
+		}	
+	}
+	return temp;
+  }
+  void Display()
+  {
+  	cout<<"The Matrix is : \n";
+  	for(int i = 0; i<3;i++)
+   {
+   	for(int j = 0; j < 3; j++)
+   	{
+      cout<<"\t"<<a[i][j];		
+    }
+    cout<<endl;
+   }
+  }	
+};
+int main()
+{
+	Matrix m1,m2,m3;
+	m1.SetMatrix();
+	m1.Display();
+	m2.SetMatrix();
+	m2.Display();
+	m3 = m1+m2;
+	m3.Display();
+	
+	return 0;
+}
